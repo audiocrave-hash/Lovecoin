@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LOVE Coin ($LOVE) — Make Love Not Rugs</title>
+  <meta name="description" content="LOVE Coin ($LOVE) — the most positive meme coin in crypto. Make Love Not Rugs." />
+
+  <style>
+    :root{
+      --bg:#07060a;
+      --card:#111018;
+      --card2:#141322;
+      --txt:#f6f4ff;
+      --muted:#bcb6d6;
+      --pink:#ff4fa3;
+      --red:#ff3b57;
+      --gold:#ffd36a;
+      --green:#50fa7b;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(255,79,163,.18), transparent 60%),
+                  radial-gradient(900px 500px at 80% 15%, rgba(255,59,87,.14), transparent 55%),
+                  radial-gradient(1000px 700px at 60% 90%, rgba(255,211,106,.10), transparent 60%),
+                  var(--bg);
+      color:var(--txt);
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1100px; margin:0 auto; padding:22px}
+    .nav{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(7,6,10,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:14px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px}
+    .pill{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .links{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:flex-end}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 14px; border-radius:12px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18)}
+    .btn.primary{
+      border:1px solid rgba(255,79,163,.38);
+      background: linear-gradient(180deg, rgba(255,79,163,.28), rgba(255,59,87,.14));
+    }
+    .btn.gold{
+      border:1px solid rgba(255,211,106,.45);
+      background: linear-gradient(180deg, rgba(255,211,106,.22), rgba(255,255,255,.03));
+    }
+
+    /* Hero */
+    .hero{padding:42px 0 10px}
+    .grid-hero{
+      display:grid; gap:18px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .grid-hero{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+    }
+    .title{
+      font-size:48px; line-height:1.02;
+      margin:0 0 10px;
+      letter-spacing:-.7px;
+    }
+    @media (max-width: 520px){
+      .title{font-size:40px}
+    }
+    .subtitle{
+      margin:0 0 18px;
+      font-size:16px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .tagline{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,79,163,.35);
+      background: rgba(255,79,163,.10);
+      color: #ffe9f4;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    .hero-actions{display:flex; flex-wrap:wrap; gap:10px}
+    .mini{
+      font-size:12px; color:var(--muted);
+      margin-top:14px;
+    }
+
+    /* Coin logo (CSS-only) */
+    .coin-wrap{
+      display:flex; flex-direction:column; gap:14px; height:100%;
+      justify-content:space-between;
+    }
+    .coin{
+      width:100%;
+      aspect-ratio:1/1;
+      border-radius: 24px;
+      display:grid; place-items:center;
+      background: radial-gradient(circle at 30% 20%, rgba(255,211,106,.25), transparent 50%),
+                  radial-gradient(circle at 70% 70%, rgba(255,79,163,.18), transparent 50%),
+                  rgba(255,255,255,.02);
+      border:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .coin::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 210deg,
+        rgba(255,211,106,.0),
+        rgba(255,211,106,.25),
+        rgba(255,79,163,.18),
+        rgba(255,211,106,.0));
+      animation: spin 9s linear infinite;
+      filter: blur(1px);
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .coin-inner{
+      width:72%;
+      aspect-ratio:1/1;
+      border-radius:999px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.35), transparent 40%),
+        radial-gradient(circle at 50% 65%, rgba(0,0,0,.25), transparent 55%),
+        linear-gradient(180deg, rgba(255,211,106,.95), rgba(255,175,70,.85));
+      border: 2px solid rgba(255,255,255,.25);
+      box-shadow: inset 0 0 0 10px rgba(255,255,255,.06),
+                  0 22px 48px rgba(0,0,0,.45);
+      display:grid; place-items:center;
+      position:relative;
+      z-index:2;
+    }
+    .heart{
+      width:46%;
+      aspect-ratio:1/1;
+      transform: translateY(-2px) rotate(-1deg);
+      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.35), transparent 35%),
+                  linear-gradient(180deg, rgba(255,59,87,1), rgba(255,79,163,1));
+      clip-path: path("M 50 90 C 20 70 0 55 0 35 C 0 15 15 0 35 0 C 45 0 50 5 50 5 C 50 5 55 0 65 0 C 85 0 100 15 100 35 C 100 55 80 70 50 90 Z");
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+    .coin-caption{
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .stat{
+      display:flex; justify-content:space-between; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size:13px;
+      color:var(--muted);
+    }
+    .stat b{color:var(--txt)}
+    .copy-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .input{
+      flex:1 1 260px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      color:var(--txt);
+      font-size:13px;
+      outline:none;
+    }
+    .toast{
+      position:fixed; left:50%; bottom:18px;
+      transform: translateX(-50%);
+      background: rgba(20,19,34,.92);
+      border:1px solid var(--line);
+      padding:10px 12px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      color: var(--txt);
+      font-size: 13px;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 50;
+    }
+    .toast.show{opacity:1; transform: translateX(-50%) translateY(-6px)}
+    /* Sections */
+    .section{padding:18px 0}
+    .section h2{
+      margin:0 0 10px;
+      font-size:20px;
+      letter-spacing:-.2px;
+    }
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+    .kpi{
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .kpi .big{font-size:18px; font-weight:800}
+    .kpi .small{font-size:13px; color:var(--muted)}
+    .roadmap{
+      display:grid; gap:12px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 900px){ .roadmap{grid-template-columns:1fr} }
+    .step{
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+    .step .label{
+      display:inline-flex; gap:8px; align-items:center;
+      font-size:12px; font-weight:800;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,211,106,.30);
+      background: rgba(255,211,106,.10);
+      margin-bottom:10px;
+    }
+    .step ul{margin:10px 0 0 18px; color:var(--muted)}
+    .footer{
+      padding:26px 0 36px;
+      border-top:1px solid var(--line);
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="badge">❤️</span>
+        <span>LOVE Coin <span class="pill">$LOVE</span></span>
+      </div>
+      <div class="links">
+        <a class="btn" href="#about">About</a>
+        <a class="btn" href="#tokenomics">Tokenomics</a>
+        <a class="btn" href="#roadmap">Roadmap</a>
+        <a class="btn gold" href="#buy">How to Buy</a>
+        <a class="btn primary" id="ctaSocial" href="#socials">Join</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div class="grid-hero">
+        <div class="card">
+          <div class="tagline">✨ Make Love Not Rugs</div>
+          <h1 class="title">LOVE Coin <span style="color:var(--pink)">$LOVE</span></h1>
+          <p class="subtitle">
+            The most positive meme coin in crypto. Built for good vibes, strong community, and relentless heart emojis.
+            Fear & Greed? Nah — we choose <b>LOVE</b>.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#buy">Buy $LOVE</a>
+            <a class="btn" href="#roadmap">Roadmap</a>
+            <a class="btn" href="#socials">Telegram / X</a>
+          </div>
+
+          <p class="mini">
+            Tip: Keep the narrative simple — <b>Love & Community</b> wins.
+          </p>
+        </div>
+
+        <div class="card coin-wrap">
+          <div class="coin" aria-label="LOVE Coin logo">
+            <div class="coin-inner">
+              <div class="heart" title="LOVE"></div>
+            </div>
+          </div>
+
+          <div class="coin-caption">
+            <div class="stat"><span>Chain</span><b>Solana</b></div>
+            <div class="stat"><span>Vibe</span><b>Wholesome Meme</b></div>
+            <div class="stat"><span>Motto</span><b>Spread Love ❤️</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>What is $LOVE?</h2>
+      <div class="grid">
+        <div class="kpi">
+          <div class="big">❤️ Proof of Love</div>
+          <div class="small">A meme coin powered by positivity and community energy.</div>
+        </div>
+        <div class="kpi">
+          <div class="big">🧠 Simple Narrative</div>
+          <div class="small">In a market full of greed, we choose LOVE.</div>
+        </div>
+        <div class="kpi">
+          <div class="big">😂 Endless Memes</div>
+          <div class="small">Every reply can be “still holding LOVE ❤️”.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="buy" class="section">
+      <h2>How to Buy</h2>
+      <div class="card">
+        <ol class="muted" style="margin:0; padding-left:18px; line-height:1.8">
+          <li>Install <b>Phantom</b> wallet.</li>
+          <li>Get some <b>SOL</b> (for gas).</li>
+          <li>Open your DEX of choice (Raydium / Jupiter) and paste the contract address.</li>
+          <li>Swap SOL → <b>$LOVE</b>.</li>
+          <li>Post a heart and say “still holding LOVE ❤️”.</li>
+        </ol>
+
+        <div style="height:12px"></div>
+
+        <div class="copy-row">
+          <input class="input" id="ca" value="PASTE_CONTRACT_ADDRESS_HERE" readonly />
+          <button class="btn gold" id="copyBtn">Copy CA</button>
+          <a class="btn" id="dexBtn" href="#" target="_blank" rel="noreferrer">Open Dexscreener</a>
+        </div>
+
+        <p class="mini muted" style="margin-bottom:0">
+          Replace the placeholder with your real token contract address after launch.
+        </p>
+      </div>
+    </section>
+
+    <section id="tokenomics" class="section">
+      <h2>Tokenomics</h2>
+      <div class="grid">
+        <div class="kpi">
+          <div class="big">1,000,000,000</div>
+          <div class="small">Total Supply</div>
+        </div>
+        <div class="kpi">
+          <div class="big">0% Tax</div>
+          <div class="small">No buy/sell taxes (keep it simple)</div>
+        </div>
+        <div class="kpi">
+          <div class="big">Community First</div>
+          <div class="small">Memes + holders + vibes = momentum</div>
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="card">
+        <div class="muted" style="line-height:1.7">
+          Suggested allocation (edit as needed):
+          <ul>
+            <li><b>75%</b> Community / Public</li>
+            <li><b>20%</b> Liquidity</li>
+            <li><b>5%</b> Team / Marketing (transparent use)</li>
+          </ul>
+          <span class="muted">Note:</span> Meme coins win with distribution + activity, not complexity.
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section">
+      <h2>Roadmap</h2>
+      <div class="roadmap">
+        <div class="step">
+          <div class="label">Phase 1 — Spark ❤️</div>
+          <div class="muted">Launch, memes, community formation.</div>
+          <ul>
+            <li>Deploy $LOVE + publish CA</li>
+            <li>Telegram + X live</li>
+            <li>Daily meme posts + raids</li>
+          </ul>
+        </div>
+        <div class="step">
+          <div class="label">Phase 2 — Spread ❤️</div>
+          <div class="muted">Push to trending via real activity.</div>
+          <ul>
+            <li>Meme contests + giveaways</li>
+            <li>Profile + links on Dexscreener</li>
+            <li>Community raid schedule</li>
+          </ul>
+        </div>
+        <div class="step">
+          <div class="label">Phase 3 — Movement ❤️</div>
+          <div class="muted">Turn $LOVE into a vibe.</div>
+          <ul>
+            <li>“Make Love Not Rugs” campaign</li>
+            <li>Influencer micro-shoutouts</li>
+            <li>Community milestones</li>
+          </ul>
+        </div>
+        <div class="step">
+          <div class="label">Phase 4 — Forever ❤️</div>
+          <div class="muted">Sustain the culture.</div>
+          <ul>
+            <li>Weekly community events</li>
+            <li>Holders spotlights</li>
+            <li>More memes. Always more memes.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="socials" class="section">
+      <h2>Socials</h2>
+      <div class="card">
+        <p class="muted" style="margin-top:0">
+          Paste your real links after setup:
+        </p>
+        <div class="copy-row">
+          <a class="btn primary" href="https://twitter.com/" target="_blank" rel="noreferrer">X / Twitter</a>
+          <a class="btn primary" href="https://t.me/" target="_blank" rel="noreferrer">Telegram</a>
+          <a class="btn" href="#" id="pumpBtn" target="_blank" rel="noreferrer">Pump.fun</a>
+        </div>
+        <p class="mini muted" style="margin-bottom:0">
+          Pro tip: pin a tweet with the CA, Dexscreener link, and a one-liner: <b>“We choose LOVE ❤️”</b>
+        </p>
+      </div>
+    </section>
+
+    <div class="footer">
+      <b>Disclaimer:</b> $LOVE is a meme coin for entertainment/community purposes only. Nothing on this site is financial advice.
+      Crypto is risky. Only spend what you can afford to lose. Be kind. Spread love. ❤️
+    </div>
+  </main>
+
+  <div class="toast" id="toast">Copied!</div>
+
+  <script>
+    const caInput = document.getElementById('ca');
+    const copyBtn  = document.getElementById('copyBtn');
+    const toast    = document.getElementById('toast');
+    const dexBtn   = document.getElementById('dexBtn');
+    const pumpBtn  = document.getElementById('pumpBtn');
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 1400);
+    }
+
+    copyBtn.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(caInput.value);
+        showToast('Contract address copied ❤️');
+      }catch(e){
+        caInput.select();
+        document.execCommand('copy');
+        showToast('Copied ❤️');
+      }
+    });
+
+    // Optional: auto-wire Dexscreener + Pump.fun links once you set CA
+    function updateLinks(){
+      const ca = caInput.value.trim();
+      if(!ca || ca === 'PASTE_CONTRACT_ADDRESS_HERE') return;
+
+      // Dexscreener Solana URL format usually: https://dexscreener.com/solana/<pairOrToken>
+      // Some projects use token address directly; adjust as needed once you have the real URL.
+      dexBtn.href = 'https://dexscreener.com/solana/' + ca;
+
+      // Pump.fun token page varies; replace with your real link after launch:
+      pumpBtn.href = 'https://pump.fun/';
+    }
+    caInput.addEventListener('change', updateLinks);
+    updateLinks();
+  </script>
+</body>
+</html>
