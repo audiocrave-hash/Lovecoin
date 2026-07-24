@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "0ddaa378737861fbe4645cfbd96ed676bf6135a67bc8d653967a3496b3ecef95"
+    },
     "interface-design": {
       "source": "Dammyjay93/interface-design",
       "sourceType": "github",
